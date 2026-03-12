@@ -29,8 +29,8 @@ ColumnLayout {
     // ── Capture Toggle ───────────────────────────────────
     NToggle {
         Layout.fillWidth: true
-        label: pluginApi?.tr("settings.capture.label") || "Capture Enabled"
-        description: pluginApi?.tr("settings.capture.description") || "Start or stop keyboard event capture"
+        label: pluginApi?.tr("settings.capture.label")
+        description: pluginApi?.tr("settings.capture.description")
         checked: root.editCapture
         onToggled: checked => root.editCapture = checked
     }
@@ -60,7 +60,7 @@ ColumnLayout {
                 }
 
                 NText {
-                    text: pluginApi?.tr("settings.ipc.title") || "IPC Commands"
+                    text: pluginApi?.tr("settings.ipc.title")
                     pointSize: Style.fontSizeS
                     font.weight: Font.Medium
                     color: Color.mOnSurface
@@ -69,7 +69,7 @@ ColumnLayout {
 
             NText {
                 Layout.fillWidth: true
-                text: pluginApi?.tr("settings.ipc.toggleCommand") || "Toggle Capture: qs -c noctalia-shell ipc call plugin:show-keys toggle"
+                text: pluginApi?.tr("settings.ipc.toggleCommand")
                 pointSize: Style.fontSizeXS
                 font.family: Settings.data.ui.fontFixed
                 color: Color.mOnSurfaceVariant
@@ -89,9 +89,9 @@ ColumnLayout {
     // ── Device Path Input  ──────────────────
     NTextInput {
         Layout.fillWidth: true
-        label: pluginApi?.tr("settings.device.label") || "Device Path (IMPORTANT)"
-        description: pluginApi?.tr("settings.device.description") || "Your keyboard device event path, RESTART noctalia-shell to apply changes."
-        placeholderText: pluginApi?.tr("settings.device.placeholder") || "/dev/input/event3"
+        label: pluginApi?.tr("settings.device.label")
+        description: pluginApi?.tr("settings.device.description")
+        placeholderText: pluginApi?.tr("settings.device.placeholder")
         text: root.editDevice
         onTextChanged: root.editDevice = text
     }
@@ -121,7 +121,7 @@ ColumnLayout {
                 }
 
                 NText {
-                    text: pluginApi?.tr("settings.guide.title") || "Setup Guide"
+                    text: pluginApi?.tr("settings.guide.title")
                     pointSize: Style.fontSizeS
                     font.weight: Font.Medium
                     color: Color.mOnSurface
@@ -130,7 +130,7 @@ ColumnLayout {
 
             NText {
                 Layout.fillWidth: true
-                text: pluginApi?.tr("settings.guide.steps") || "• FIRST-TIME users: RUN 'sudo evtest' (requirement) to find your device path.\n• ADD your user to the 'input' group (RUN 'sudo usermod -aG input $USER'), then REBOOT (only required once)."
+                text: pluginApi?.tr("settings.guide.steps")
                 pointSize: Style.fontSizeXS
                 font.family: Settings.data.ui.fontFixed
                 color: Color.mOnSurfaceVariant
@@ -146,8 +146,8 @@ ColumnLayout {
         spacing: Style.marginS
 
         NLabel {
-            label: pluginApi?.tr("settings.monitors.label") || "Active Monitors"
-            description: pluginApi?.tr("settings.monitors.description") || "Select which monitors will display the key overlay"
+            label: pluginApi?.tr("settings.monitors.label")
+            description: pluginApi?.tr("settings.monitors.description")
         }
 
         Repeater {
@@ -189,15 +189,15 @@ ColumnLayout {
         spacing: Style.marginS
 
         NLabel {
-            label: pluginApi?.tr("settings.position.label") || "OSD Position"
-            description: pluginApi?.tr("settings.position.description") || "Where the key overlay appears on screen"
+            label: pluginApi?.tr("settings.position.label")
+            description: pluginApi?.tr("settings.position.description")
         }
 
         NComboBox {
             Layout.fillWidth: true
             model: [
-                { key: "bottom", name: pluginApi?.tr("settings.position.bottom") || "Bottom" },
-                { key: "top",    name: pluginApi?.tr("settings.position.top")    || "Top" }
+                { key: "bottom", name: pluginApi?.tr("settings.position.bottom") },
+                { key: "top",    name: pluginApi?.tr("settings.position.top")    }
             ]
             currentKey: root.editPosition
             onSelected: key => root.editPosition = key
@@ -210,8 +210,8 @@ ColumnLayout {
         spacing: Style.marginS
 
         NLabel {
-            label: pluginApi?.tr("settings.margin.label") || "Edge Margin"
-            description: pluginApi?.tr("settings.margin.description", { value: root.editMargin }) || ("Distance from screen edge: " + root.editMargin + " px")
+            label: pluginApi?.tr("settings.margin.label")
+            description: pluginApi?.tr("settings.margin.description", { value: root.editMargin })
         }
 
         NSlider {
@@ -230,8 +230,8 @@ ColumnLayout {
         spacing: Style.marginS
 
         NLabel {
-            label: pluginApi?.tr("settings.delay.label") || "Auto-hide Delay"
-            description: pluginApi?.tr("settings.delay.description", { value: root.editDelay }) || ("Seconds before OSD fades out: " + root.editDelay + " s")
+            label: pluginApi?.tr("settings.delay.label")
+            description: pluginApi?.tr("settings.delay.description", { value: root.editDelay })
         }
 
         NSlider {
@@ -253,8 +253,8 @@ ColumnLayout {
     // ── Colors ───────────────────────────────────────────
     NToggle {
         Layout.fillWidth: true
-        label: pluginApi?.tr("settings.useCustomColors.label") || "Use Custom Colors"
-        description: pluginApi?.tr("settings.useCustomColors.description") || "Override Noctalia default theme colors"
+        label: pluginApi?.tr("settings.useCustomColors.label")
+        description: pluginApi?.tr("settings.useCustomColors.description")
         checked: root.editUseCustomColors
         onToggled: checked => root.editUseCustomColors = checked
     }
@@ -265,8 +265,8 @@ ColumnLayout {
         visible: root.editUseCustomColors
 
         NLabel {
-            label: pluginApi?.tr("settings.pillColor.label") || "Pill Text Color"
-            description: pluginApi?.tr("settings.pillColor.description") || "Color of the key label text"
+            label: pluginApi?.tr("settings.pillColor.label")
+            description: pluginApi?.tr("settings.pillColor.description")
         }
 
         NColorPicker {
@@ -283,8 +283,8 @@ ColumnLayout {
         visible: root.editUseCustomColors
 
         NLabel {
-            label: pluginApi?.tr("settings.pillBg.label") || "Pill Background Color"
-            description: pluginApi?.tr("settings.pillBg.description") || "Background color of each key pill"
+            label: pluginApi?.tr("settings.pillBg.label")
+            description: pluginApi?.tr("settings.pillBg.description")
         }
 
         NColorPicker {
@@ -303,7 +303,7 @@ ColumnLayout {
 
     // ── Preview ──────────────────────────────────────────
     NLabel {
-        label: pluginApi?.tr("settings.preview.label") || "Preview"
+        label: pluginApi?.tr("settings.preview.label")
     }
 
     Row {
@@ -344,15 +344,10 @@ ColumnLayout {
         pluginApi.pluginSettings.captureEnabled = root.editCapture;
         pluginApi.pluginSettings.evtestDevice   = root.editDevice;
         pluginApi.pluginSettings.useCustomColors= root.editUseCustomColors;
-        
         if (root.editUseCustomColors) {
             pluginApi.pluginSettings.pillColor  = root.editPillColor.toString();
             pluginApi.pluginSettings.pillBg     = root.editPillBg.toString();
-        } else {
-            pluginApi.pluginSettings.pillColor  = "";
-            pluginApi.pluginSettings.pillBg     = "";
         }
-        
         pluginApi.pluginSettings.position       = root.editPosition;
 
         pluginApi.pluginSettings.marginPx       = root.editMargin;
