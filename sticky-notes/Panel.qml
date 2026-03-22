@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import qs.Commons
-import "components" as Components
+import "components"
 import "utils/storage.js" as Storage
 
 // Panel Component — Main sticky-note interface
@@ -114,7 +114,7 @@ Item {
     anchors.fill: parent
     color: "transparent"
 
-    Components.NoteList {
+    NoteList {
       id: noteList
       anchors.fill: parent
       anchors.margins: Style.marginM

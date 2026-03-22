@@ -3,7 +3,7 @@ import Quickshell
 import Quickshell.Wayland
 import qs.Commons
 
-import "components" as Components
+import "components"
 
 PanelWindow {
   id: root
@@ -43,7 +43,7 @@ PanelWindow {
     noteWindowClosed();
   }
 
-  Components.ExpandedNoteWindow {
+  ExpandedNoteWindow {
     id: contentItem
     anchors.fill: parent
     visible: root.visible
