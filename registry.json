@@ -987,7 +987,7 @@
     {
       "id": "screen-toolkit",
       "name": "Screen Toolkit",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "official": false,
       "author": "ycf-anon",
       "description": "A set of screen tools: color picker, annotate, record, pin, OCR, QR scanner, palette, measure, and webcam mirror.",
@@ -1000,7 +1000,7 @@
         "Utility",
         "System"
       ],
-      "lastUpdated": "2026-03-23T05:54:29+05:30"
+      "lastUpdated": "2026-03-26T16:29:51+01:00"
     },
     {
       "id": "screenshot",
