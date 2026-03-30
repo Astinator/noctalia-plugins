@@ -26,6 +26,7 @@
       "method": 3,
       "school": 0,
       "showCountdown": true,
+      "showElapsed": false,
       "showNotifications": true,
       "playAzan": false,
       "azanFile": "azan1.mp3",
