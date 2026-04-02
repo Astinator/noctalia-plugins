@@ -1029,13 +1029,13 @@
       "author": "Cleboost",
       "description": "Quick screenshot button in bar for Hyprland, Sway, and Niri",
       "repository": "https://github.com/noctalia-dev/noctalia-plugins",
-      "minNoctaliaVersion": "3.6.0",
+      "minNoctaliaVersion": "3.6.1",
       "license": "MIT",
       "tags": [
         "Bar",
         "Utility"
       ],
-      "lastUpdated": "2026-03-29T19:05:12-04:00"
+      "lastUpdated": "2026-04-02T17:14:06+02:00"
     },
     {
       "id": "show-keys",
