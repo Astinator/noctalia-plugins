@@ -698,7 +698,6 @@ Item {
                   required property var modelData
                   width: gridView.cellWidth
                   height: gridView.cellHeight
-                  readonly property bool isPreviewActive: tileMouse.containsMouse || root.pendingPath === modelData.path || root.selectedPath === modelData.path
                   radius: Style.radiusL
                   color: Qt.alpha(Color.mSurface, 0.82)
                   border.width: root.pendingPath === modelData.path ? 2 : (root.selectedPath === modelData.path ? 1 : 0)
@@ -727,7 +726,7 @@ Item {
 
                       Loader {
                         anchors.fill: parent
-                        active: modelData.motionPreview && modelData.motionPreview.length > 0 && tileCard.isPreviewActive
+                        active: modelData.motionPreview && modelData.motionPreview.length > 0
                         sourceComponent: root.isVideoMotion(modelData.motionPreview) ? motionVideoComponent : motionAnimatedComponent
                       }
 
@@ -762,7 +761,7 @@ Item {
 
                       NIcon {
                         anchors.centerIn: parent
-                        visible: (!modelData.thumb || modelData.thumb.length === 0) && (!modelData.motionPreview || modelData.motionPreview.length === 0 || !tileCard.isPreviewActive)
+                        visible: (!modelData.thumb || modelData.thumb.length === 0) && (!modelData.motionPreview || modelData.motionPreview.length === 0)
                         icon: "photo"
                         pointSize: Style.fontSizeXL
                         color: Color.mOnSurfaceVariant
