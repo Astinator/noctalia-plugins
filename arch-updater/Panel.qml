@@ -74,7 +74,7 @@ Item {
                 color: Color.mSurfaceVariant
                 radius: Style.radiusL
 
-                ListView {
+                NListView {
                     id: tableView
                     anchors.fill: parent
                     anchors.margins: Style.marginS

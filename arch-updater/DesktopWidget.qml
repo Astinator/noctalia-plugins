@@ -79,7 +79,7 @@ DraggableDesktopWidget {
         }
 
         // Table
-        ListView {
+        NListView {
             id: tableView
             width: root.tableContentWidth
             height: root.implicitHeight - Style.fontSizeXL - Style.fontSizeM - 4 * Style.marginL - 2 * Style.marginXL - 1
