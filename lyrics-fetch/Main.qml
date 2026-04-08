@@ -167,7 +167,7 @@ Item {
 
     Process {
         id: songPositionProc
-        command: ["playerctl", "position"]
+        command: ["playerctl", "position", "-F"]
         running: false
 
         stdout: SplitParser {
