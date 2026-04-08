@@ -28,6 +28,13 @@ DraggableDesktopWidget {
     property string rootDisk: pluginApi?.tr("widget.loading")
     property string homeDisk: pluginApi?.tr("widget.loading")
 
+    function getTempHex(tempString) {
+        let val = parseFloat(tempString.replace(/[^\d.]/g, ''));
+        if (isNaN(val)) return "#ffffff"; // Default white
+        if (val >= 80) return "#ff5555"; // Hot
+        if (val >= 65) return "#ffb86c"; // Warm
+        return "#50fa7b"; // Cool :talialuv:
+    }
     // --- Data Fetching ---
     Process {
         id: distroProc
@@ -201,7 +208,8 @@ DraggableDesktopWidget {
                     font.pointSize: Style.fontSizeL * widgetScale
                 }
                 NText {
-                    text: root.cpuUsage + " @ " + root.cpuTemp
+                    text: root.cpuUsage + " @ <font color='" + root.getTempHex(root.cpuTemp) + "'>" + root.cpuTemp + "</font>"
+                    textFormat: Text.RichText
                     color: Color.mOnSurface
                     font.bold: true
                     font.pointSize: Style.fontSizeL * widgetScale
