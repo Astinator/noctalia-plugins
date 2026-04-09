@@ -3,7 +3,14 @@
     "settings": "Widget settings"
   },
   "panel": {
-    "test": "This string is translated via the plugin API",
+    "title": "Git Companion",
+    "repo": {
+      "desc": "Select a repository to display",
+      "label": "Repository"
+    },
+    "issues": "Issues",
+    "mr": "Merge Requests",
+    "pr": "Pull Requests",
     "open-settings": "Open Plugin Settings",
     "refresh": "Refresh"
   },
@@ -11,15 +18,6 @@
     "platform": {
       "desc": "Choose your git platform (Gitlab or Github).",
       "label": "Platform"
-    },
-    "message": {
-      "desc": "Custom message to display in the panel.",
-      "label": "Message",
-      "placeholder": "Enter a message..."
-    },
-    "iconFilled": {
-      "desc": "Change icon for filled variant",
-      "label": "Filled Icon"
     },
     "refreshInterval": {
       "desc": "How often to refresh data, in seconds.",

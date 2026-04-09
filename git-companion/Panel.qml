@@ -28,7 +28,7 @@ Item {
 
     // Plugin API (injected by PluginPanelSlot)
     property var pluginApi: null
-    property string prString: platform === 'gitlab' ? "Merge Requests" : "Pull Requests"
+    property string prString: platform === 'gitlab' ? pluginApi?.tr("panel.mr") : pluginApi?.tr("panel.pr")
     property var repoList: cfg.repoList ?? []
     property string selectedRepo: cfg.selectedRepo ?? defaults.selectedRepo
     property var user: cfg.user ?? {
@@ -259,7 +259,7 @@ Item {
                             elide: Text.ElideRight
                             font.weight: Style.fontWeightBold
                             pointSize: Style.fontSizeL
-                            text: "Git Companion"
+                            text: pluginApi?.tr("panel.title")
                         }
                     }
                     NIconButton {
@@ -271,7 +271,6 @@ Item {
                             // Use panelOpenScreen to get the screen this panel is on
                             var screen = pluginApi?.panelOpenScreen;
                             if (screen && pluginApi?.manifest) {
-                                Logger.i("HelloWorld", "Opening plugin settings on screen:", screen.name);
                                 BarService.openPluginSettings(screen, pluginApi.manifest);
                             }
                         }
@@ -411,8 +410,8 @@ Item {
 
                                 Layout.fillWidth: true
                                 currentKey: root.selectedRepo
-                                description: "Select a repository to display"
-                                label: "Repository"
+                                description: pluginApi?.tr("panel.repo.desc")
+                                label: pluginApi?.tr("panel.repo.label")
                                 model: root.repoList
 
                                 onSelected: key => {
@@ -461,7 +460,7 @@ Item {
                                 NText {
                                     color: Color.mOnSurfaceVariant
                                     font.pointSize: Style.fontSizeM
-                                    text: "Issues (" + root.issues + ")"
+                                    text: pluginApi?.tr("panel.issues") + " (" + root.issues + ")"
                                 }
                             }
                         }

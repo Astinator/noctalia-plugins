@@ -21,6 +21,7 @@ Item {
     property string prs: cfg.prs ?? defaults.prs
     property int sectionWidgetIndex: -1
     property int sectionWidgetsCount: 0
+    property string section: ""
     property string widgetId: ""
 
     implicitWidth: pill.width
@@ -56,7 +57,6 @@ Item {
         icon: platform === 'gitlab' ? 'brand-gitlab' : "brand-github"
         oppositeDirection: BarService.getPillDirection(root)
         screen: root.screen
-        // text: "Issues: " + issues
         tooltipText: root.tooltipText
 
         onClicked: {

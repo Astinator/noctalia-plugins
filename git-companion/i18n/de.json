@@ -3,23 +3,21 @@
     "settings": "Widget Einstellungen"
   },
   "panel": {
-    "test": "Diese Zeichenkette wird über die Plugin-API übersetzt",
+    "issues": "Issues",
+    "mr": "Merge Requests",
     "open-settings": "Plugin-Einstellungen öffnen",
-    "refresh": "Aktualisieren"
+    "pr": "Pull Requests",
+    "refresh": "Aktualisieren",
+    "repo": {
+      "desc": "Ein Repository zum Anzeigen auswählen",
+      "label": "Repository"
+    },
+    "title": "Git Companion"
   },
   "settings": {
     "platform": {
       "desc": "Wählen Sie Ihre Git-Plattform (Gitlab oder Github).",
       "label": "Plattform"
-    },
-    "message": {
-      "desc": "Benutzerdefinierte Nachricht, die im Panel angezeigt werden soll.",
-      "label": "Nachricht",
-      "placeholder": "Nachricht eingeben..."
-    },
-    "iconFilled": {
-      "desc": "Symbol für gefüllte Variante ändern",
-      "label": "Gefülltes Symbol"
     },
     "refreshInterval": {
       "desc": "Wie oft die Daten aktualisiert werden, in Sekunden.",
