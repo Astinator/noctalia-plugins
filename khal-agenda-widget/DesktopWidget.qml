@@ -65,7 +65,7 @@ DraggableDesktopWidget {
                 }
 
                 Button {
-                    text: "📅"
+                    text: pluginApi.tr("widget.button")
                     flat: true
                     background: null
                     onClicked: {
