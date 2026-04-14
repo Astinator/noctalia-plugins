@@ -4,7 +4,7 @@
 A theme aware Noctalia desktop plugin that displays agenda information.
 
 ## Features
-Shows the next 7 days of events.
+Shows upcoming events for the next 7 days of events.
 Icon click to open the full calendar.
 
 ## Configuration

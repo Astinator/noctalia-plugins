@@ -23,7 +23,7 @@ DraggableDesktopWidget {
     // Main data process
     Process {
         id: calProc
-        command: ["sh", "-c", "khal list today 7d --format '{start-time} {title}' --day-format '{name}, {date}'"]
+        command: ["sh", "-c", "khal list --notstarted now 7d --format '{start-time} {title}' --day-format '{name}, {date}'"]
         // command: ["sh", "-c", "khal list today 7d --format '{start-end-time-style} {title}' --day-format '{name}, {date}'"]
         running: root.pluginApi !== null
         stdout: StdioCollector {
@@ -39,7 +39,7 @@ DraggableDesktopWidget {
             "for term in xdg-terminal-exec kitty alacritty foot gnome-terminal konsole st xterm; do " +
             "if command -v $term >/dev/null 2>&1; then " +
             "if [ \"$term\" = \"kitty\" ]; then " +
-            "exec kitty --class khal -e ikhal; " +
+            "exec kitty --config ~/.config/kitty/calendar.conf --class khal -e ikhal; " +
             "else " +
             "exec $term -e ikhal 2>/dev/null || exec $term -- ikhal; " +
             "fi; break; fi; done"
