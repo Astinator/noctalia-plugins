@@ -12,8 +12,8 @@ None
 
 ## Requirements
 - **Noctalia Shell**: 3.6.0 or later.
-- **System Dependencies**: khal, kitty
+- **System Dependencies**: khal
 
 ## Technical Details
-- **Data Source**: Uses khal command line and kitty terminal.
+- **Data Source**: Uses khal command line.
 - **Backend**: QML integration with shell-based data collection.
