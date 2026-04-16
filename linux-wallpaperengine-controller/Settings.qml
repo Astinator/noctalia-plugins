@@ -51,7 +51,7 @@ ColumnLayout {
   }
 
   function formatBytes(bytes) {
-    return ColorCacheHelpers.formatBytes(bytes, pluginApi?.tr("settings.cache.sizeUnknown") || "Unknown");
+    return ColorCacheHelpers.formatBytes(bytes, pluginApi?.tr("settings.cache.sizeUnknown"));
   }
 
   function preservedWallpaperColorScreenshots() {
@@ -395,10 +395,21 @@ ColumnLayout {
       return ["bash", scriptPath, root.pluginCacheDir];
     }
 
-    onExited: function () {
+    onExited: function (exitCode) {
       root.refreshingCacheSize = false;
-      const bytes = Number(String(stdout.text || "0").trim());
-      if (isNaN(bytes) || bytes < 0) {
+
+      if (exitCode !== 0) {
+        const errorOutput = String(stderr.text || "").trim();
+        if (errorOutput.length > 0) {
+          console.warn("Failed to get cache size:", errorOutput);
+        }
+        root.cacheSizeLabel = pluginApi?.tr("settings.cache.sizeUnknown");
+        return;
+      }
+
+      const output = String(stdout.text || "").trim();
+      const bytes = Number(output);
+      if (output.length === 0 || isNaN(bytes) || bytes < 0) {
         root.cacheSizeLabel = pluginApi?.tr("settings.cache.sizeUnknown");
         return;
       }

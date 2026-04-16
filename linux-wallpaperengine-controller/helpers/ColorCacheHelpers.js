@@ -1,13 +1,23 @@
 .pragma library
 
+function sanitizeCachePathSegment(value, fallbackValue) {
+  const trimmedValue = String(value || "").trim();
+  const normalizedValue = trimmedValue.length > 0 ? trimmedValue : String(fallbackValue || "");
+  return normalizedValue.replace(/[^A-Za-z0-9._-]+/g, "_");
+}
+
 function screenCacheKey(screenName) {
-  return String(screenName || "screen").replace(/[^A-Za-z0-9._-]+/g, "_");
+  return sanitizeCachePathSegment(screenName, "screen");
 }
 
 function screenshotPathForWallpaper(cacheDir, wallpaperId, screenName) {
-  const fileId = String(wallpaperId || "").trim().length > 0 ? String(wallpaperId).trim() : "wallpaper";
+  const normalizedCacheDir = String(cacheDir || "").trim();
+  const cacheRoot = normalizedCacheDir.length > 0
+    ? normalizedCacheDir.replace(/\/+$/, "") + "/"
+    : "";
+  const fileId = sanitizeCachePathSegment(wallpaperId, "wallpaper");
   const screenId = screenCacheKey(screenName);
-  return String(cacheDir || "") + "linux-wallpaperengine-controller/" + screenId + "-" + fileId + "-theme-shot.png";
+  return cacheRoot + "linux-wallpaperengine-controller/" + screenId + "-" + fileId + "-theme-shot.png";
 }
 
 function cachedScreenshotEntry(entries, screenName) {
