@@ -1,7 +1,4 @@
 {
-  "provider": {
-    "name": "Niri Çalışma Alanları"
-  },
   "launcher": {
     "command": {
       "description": "Niri çalışma alanlarını filtreleyin, geçiş yapın, yeniden adlandırın veya sıfırlayın"

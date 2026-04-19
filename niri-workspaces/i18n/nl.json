@@ -1,7 +1,4 @@
 {
-  "provider": {
-    "name": "Niri-werkruimtes"
-  },
   "launcher": {
     "command": {
       "description": "Niri-werkruimtes filteren, wisselen, hernoemen of resetten"

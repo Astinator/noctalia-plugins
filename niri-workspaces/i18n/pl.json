@@ -1,7 +1,4 @@
 {
-  "provider": {
-    "name": "Obszary robocze Niri"
-  },
   "launcher": {
     "command": {
       "description": "Filtruj, przełączaj, zmieniaj nazwy lub resetuj obszary robocze Niri"

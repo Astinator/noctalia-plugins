@@ -1,7 +1,4 @@
 {
-  "provider": {
-    "name": "Niri-Arbeitsflächen"
-  },
   "launcher": {
     "command": {
       "description": "Niri-Arbeitsflächen filtern, wechseln, umbenennen oder zurücksetzen"

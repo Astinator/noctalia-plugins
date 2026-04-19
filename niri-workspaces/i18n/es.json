@@ -1,7 +1,4 @@
 {
-  "provider": {
-    "name": "Espacios de trabajo de Niri"
-  },
   "launcher": {
     "command": {
       "description": "Filtrar, cambiar, renombrar o restablecer espacios de trabajo de Niri"

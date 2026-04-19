@@ -1,7 +1,4 @@
 {
-  "provider": {
-    "name": "Aree di lavoro Niri"
-  },
   "launcher": {
     "command": {
       "description": "Filtra, cambia, rinomina o reimposta le aree di lavoro Niri"

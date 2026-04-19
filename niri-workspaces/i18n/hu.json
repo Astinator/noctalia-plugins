@@ -1,7 +1,4 @@
 {
-  "provider": {
-    "name": "Niri munkaterületek"
-  },
   "launcher": {
     "command": {
       "description": "Niri munkaterületek szűrése, váltás, átnevezés vagy visszaállítás"

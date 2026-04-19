@@ -1,7 +1,4 @@
 {
-  "provider": {
-    "name": "Niri ワークスペース"
-  },
   "launcher": {
     "command": {
       "description": "Niri ワークスペースの絞り込み・切り替え・名前変更・リセット"

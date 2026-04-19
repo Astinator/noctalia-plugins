@@ -1,7 +1,4 @@
 {
-  "provider": {
-    "name": "Niri 工作区"
-  },
   "launcher": {
     "command": {
       "description": "筛选、切换、重命名或重置 Niri 工作区"

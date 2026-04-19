@@ -1,7 +1,4 @@
 {
-  "provider": {
-    "name": "Niri Workspaces"
-  },
   "launcher": {
     "command": {
       "description": "Filter, jump to, rename or reset Niri workspaces"

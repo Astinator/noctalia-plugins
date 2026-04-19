@@ -7,7 +7,7 @@ Item {
 
   property var pluginApi: null
 
-  property string name: pluginApi?.tr("provider.name")
+  property string name: "Niri Workspaces"
   property var launcher: null
   property bool handleSearch: false
   property string supportedLayouts: "list"
