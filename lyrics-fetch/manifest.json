@@ -25,7 +25,8 @@
       "fontSize": 10,
       "scrollMode": "always",
       "hideWhenEmpty": true,
-      "adaptScrollSpeed": true
+      "adaptScrollSpeed": true,
+      "verticalRotationDirection": "auto"
     }
   },
   "repository": "https://github.com/noctalia-dev/noctalia-plugins"
