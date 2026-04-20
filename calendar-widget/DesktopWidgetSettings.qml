@@ -32,7 +32,7 @@ ColumnLayout {
     defaultValue: widgetMetadata.showBackground
   }
 
-	NToggle {
+  NToggle {
     Layout.fillWidth: true
     visible: valueShowBackground
     label: pluginApi?.tr("settings.roundedCorners.label")
@@ -52,7 +52,7 @@ ColumnLayout {
     }
 
     widgetSettings.data.showBackground = root.valueShowBackground;
-		widgetSettings.data.roundedCorners = root.valueRoundedCorners;
+    widgetSettings.data.roundedCorners = root.valueRoundedCorners;
 
     widgetSettings.save();
 
