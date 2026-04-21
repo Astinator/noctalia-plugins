@@ -16,25 +16,33 @@ Item {
   readonly property var defaults: pluginApi?.manifest?.metadata?.defaultSettings || ({})
   readonly property string launcherPrefix: cfg.launcherPrefix ?? defaults.launcherPrefix ?? ">ws"
 
-  property var workspaces: []
-  readonly property var focusedWorkspace: {
-    for (var i = 0; i < workspaces.length; i++) {
-      if (workspaces[i].is_focused) return workspaces[i];
+  // Snapshot of CompositorService.workspaces as a plain array. Rebuilt on
+  // workspaceChanged so JS-array consumers (LauncherProvider) get a stable,
+  // iterable view. The backend ListModel is already sorted by output+idx.
+  property var sortedWorkspaces: []
+  property var focusedWorkspace: null
+
+  signal workspacesChanged
+
+  Connections {
+    target: CompositorService
+    function onWorkspaceChanged() {
+      root.rebuildWorkspaces();
     }
-    return null;
   }
 
-  // Workspaces sorted by output then visual index (idx). Recomputed whenever
-  // `workspaces` changes so LauncherProvider bindings stay live.
-  readonly property var sortedWorkspaces: {
-    var copy = workspaces.slice();
-    copy.sort(function (a, b) {
-      var ao = a.output || "";
-      var bo = b.output || "";
-      if (ao !== bo) return ao < bo ? -1 : 1;
-      return (a.idx || 0) - (b.idx || 0);
-    });
-    return copy;
+  function rebuildWorkspaces() {
+    var arr = [];
+    var focused = null;
+    var model = CompositorService.workspaces;
+    for (var i = 0; i < model.count; i++) {
+      var w = model.get(i);
+      arr.push(w);
+      if (w.isFocused) focused = w;
+    }
+    sortedWorkspaces = arr;
+    focusedWorkspace = focused;
+    workspacesChanged();
   }
 
   // Resolve a workspace into a `--workspace` reference acceptable to the
@@ -49,8 +57,8 @@ Item {
   }
 
   function findWorkspaceById(id) {
-    for (var i = 0; i < workspaces.length; i++) {
-      if (workspaces[i].id === id) return workspaces[i];
+    for (var i = 0; i < sortedWorkspaces.length; i++) {
+      if (sortedWorkspaces[i].id === id) return sortedWorkspaces[i];
     }
     return null;
   }
@@ -67,7 +75,7 @@ Item {
     // already focused (also avoids our idx ref misfiring for unnamed
     // workspaces).
     var args = ["niri", "msg", "action"];
-    var ref = ws.is_focused ? null : workspaceRef(ws);
+    var ref = ws.isFocused ? null : workspaceRef(ws);
 
     if (trimmed.length === 0) {
       args.push("unset-workspace-name");
@@ -106,86 +114,10 @@ Item {
     // niri's `focus-workspace <idx>` toggles back to the previous workspace
     // when the target is already focused. Skip the dispatch so re-selecting
     // the current workspace is a no-op.
-    if (ws.is_focused) return;
+    if (ws.isFocused) return;
     var ref = workspaceRef(ws);
     if (ref === null) return;
     Quickshell.execDetached(["niri", "msg", "action", "focus-workspace", ref]);
-  }
-
-  // --- Niri event stream ---
-  // niri prints one JSON object per line. On connect it emits a snapshot
-  // (WorkspacesChanged + friends) followed by incremental events.
-  Process {
-    id: eventStream
-    command: ["niri", "msg", "--json", "event-stream"]
-    running: false
-
-    stdout: SplitParser {
-      onRead: line => root.handleEventLine(line)
-    }
-
-    onExited: function (exitCode) {
-      Logger.w("NiriWorkspaces", "event-stream exited with code", exitCode);
-      if (root.isNiri) restartTimer.start();
-    }
-  }
-
-  Timer {
-    id: restartTimer
-    interval: 2000
-    repeat: false
-    onTriggered: {
-      if (root.isNiri && !eventStream.running) {
-        eventStream.running = true;
-      }
-    }
-  }
-
-  function handleEventLine(line) {
-    if (!line || line.length === 0) return;
-    var evt;
-    try {
-      evt = JSON.parse(line);
-    } catch (e) {
-      return;
-    }
-
-    if (evt.WorkspacesChanged && Array.isArray(evt.WorkspacesChanged.workspaces)) {
-      root.workspaces = evt.WorkspacesChanged.workspaces;
-      return;
-    }
-
-    if (evt.WorkspaceActivated) {
-      var activated = evt.WorkspaceActivated;
-      var targetOutput = null;
-      for (var j = 0; j < root.workspaces.length; j++) {
-        if (root.workspaces[j].id === activated.id) {
-          targetOutput = root.workspaces[j].output;
-          break;
-        }
-      }
-      var copy = [];
-      for (var i = 0; i < root.workspaces.length; i++) {
-        var ws = root.workspaces[i];
-        var updated = Object.assign({}, ws);
-        if (ws.id === activated.id) {
-          updated.is_active = true;
-          if (activated.focused) updated.is_focused = true;
-        } else {
-          // Exactly one active workspace per output.
-          if (targetOutput !== null && ws.output === targetOutput) {
-            updated.is_active = false;
-          }
-          // Exactly one focused workspace globally.
-          if (activated.focused) updated.is_focused = false;
-        }
-        copy.push(updated);
-      }
-      root.workspaces = copy;
-      return;
-    }
-
-    // Other events (WindowsChanged, KeyboardLayoutsChanged, etc) are ignored.
   }
 
   IpcHandler {
@@ -221,14 +153,10 @@ Item {
 
   Component.onCompleted: {
     if (isNiri) {
-      eventStream.running = true;
-      Logger.i("NiriWorkspaces", "Listening to niri event-stream");
+      Logger.i("NiriWorkspaces", "Using CompositorService for workspace state");
     } else {
       Logger.w("NiriWorkspaces", "Not running on Niri — plugin inactive");
     }
-  }
-
-  Component.onDestruction: {
-    eventStream.running = false;
+    rebuildWorkspaces();
   }
 }

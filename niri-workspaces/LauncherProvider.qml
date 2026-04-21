@@ -282,8 +282,8 @@ Item {
 
   function buildWorkspaceEntry(ws) {
     var label = workspaceLabel(ws);
-    if (ws.is_focused) label += pluginApi?.tr("launcher.currentSuffix");
-    var descKey = ws.is_focused ? "launcher.focus.descriptionCurrent" : "launcher.focus.description";
+    if (ws.isFocused) label += pluginApi?.tr("launcher.currentSuffix");
+    var descKey = ws.isFocused ? "launcher.focus.descriptionCurrent" : "launcher.focus.description";
     var desc = pluginApi?.tr(descKey);
     if (ws.output) desc = desc + " — " + ws.output;
     var wsId = ws.id;
@@ -291,7 +291,7 @@ Item {
     return {
       "name": label,
       "description": desc,
-      "icon": ws.is_focused ? "check" : "chevron-right",
+      "icon": ws.isFocused ? "check" : "chevron-right",
       "isTablerIcon": true,
       "isImage": false,
       "provider": root,
