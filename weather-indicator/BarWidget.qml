@@ -63,7 +63,7 @@ Item {
     hoverEnabled: true
     cursorShape: Qt.PointingHandCursor
     acceptedButtons: Qt.LeftButton | Qt.RightButton
-    onEntered: if (root.s.tooltipOption !== "disable") TooltipService.show(root, Utils.getTooltipRows(LocationService.data.weather, root.s.tooltipOption, Settings.data.location.useFahrenheit, Settings.data.location.use12hourFormat, (s) => pluginApi?.tr(s) || s, LocationService, I18n), BarService.getTooltipDirection(screenName))
+    onEntered: if (root.s.tooltipOption !== "disable") TooltipService.show(root, Utils.getTooltipRows(LocationService.data.weather, root.s.tooltipOption, Settings.data.location.useFahrenheit, Settings.data.location.use12hourFormat, (s) => pluginApi?.tr(s), LocationService, I18n), BarService.getTooltipDirection(screenName))
     onExited: TooltipService.hide()
     onClicked: (mouse) => mouse.button === Qt.LeftButton ? pluginApi?.openPanel(screen, root) : PanelService.showContextMenu(contextMenu, root, screen)
   }

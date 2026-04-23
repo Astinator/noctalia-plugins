@@ -19,7 +19,7 @@ NIconButtonHot {
     implicitWidth: Math.round(Style.baseWidgetSize * Style.uiScaleRatio)
     implicitHeight: implicitWidth
 
-    tooltipText: Utils.getTooltipRows(LocationService.data.weather, s.tooltipOption || "everything", Settings.data.location.useFahrenheit, Settings.data.location.use12hourFormat, (s) => pluginApi?.tr(s) || s, LocationService, I18n)
+    tooltipText: Utils.getTooltipRows(LocationService.data.weather, s.tooltipOption || "everything", Settings.data.location.useFahrenheit, Settings.data.location.use12hourFormat, (s) => pluginApi?.tr(s), LocationService, I18n)
 
     onClicked: pluginApi?.togglePanel(screen, this)
 }

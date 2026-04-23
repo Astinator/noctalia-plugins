@@ -4,6 +4,7 @@ import qs.Widgets
 
 Item {
   id: root
+  property var pluginApi: null
   readonly property var geometryPlaceholder: root
   property real contentPreferredWidth: 670 * Style.uiScaleRatio
   property real contentPreferredHeight: 270 * Style.uiScaleRatio
