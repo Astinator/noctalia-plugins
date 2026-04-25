@@ -115,7 +115,6 @@ Item {
     property var peerList: []
     property bool managementConnected: false
     property bool signalConnected: false
-    property string managementFqdn: ""
     property string managementUrlDetected: ""
 
     property var peerPings: ({})
@@ -202,7 +201,6 @@ Item {
                     root.managementConnected = data.management?.connected ?? false;
                     root.signalConnected = data.signal?.connected ?? false;
                     root.managementUrlDetected = root.extractManagementUrl(data);
-                    root.managementFqdn = root.managementUrlDetected;
 
                     root.netbirdRunning = root.managementConnected;
 
@@ -244,7 +242,6 @@ Item {
                         root.peerConnected = 0;
                         root.peerList = [];
                         root.managementUrlDetected = "";
-                        root.managementFqdn = "";
                     }
                 } catch (e) {
                     Logger.e("NetBird", "Failed to parse status: " + e);
@@ -252,7 +249,6 @@ Item {
                     root.netbirdStatus = "Error";
                     root.peerList = [];
                     root.managementUrlDetected = "";
-                    root.managementFqdn = "";
                 }
             } else {
                 root.netbirdRunning = false;
@@ -263,7 +259,6 @@ Item {
                 root.peerConnected = 0;
                 root.peerList = [];
                 root.managementUrlDetected = "";
-                root.managementFqdn = "";
             }
         }
     }
