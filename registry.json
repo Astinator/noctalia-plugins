@@ -1063,6 +1063,23 @@
       "lastUpdated": "2026-02-05T11:41:54-08:00"
     },
     {
+      "id": "niri-workspaces",
+      "name": "Niri Workspaces",
+      "version": "1.0.0",
+      "official": false,
+      "author": "Kohányi Róbert",
+      "description": "Filter, jump to, rename or reset Niri workspaces from the launcher.",
+      "repository": "https://github.com/noctalia-dev/noctalia-plugins",
+      "minNoctaliaVersion": "4.4.1",
+      "license": "MIT",
+      "tags": [
+        "Launcher",
+        "Utility",
+        "Niri"
+      ],
+      "lastUpdated": "2026-04-21T07:58:38+02:00"
+    },
+    {
       "id": "noctalia-calculator",
       "name": "Calculator",
       "version": "1.0.0",
