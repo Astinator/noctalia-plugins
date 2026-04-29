@@ -838,7 +838,7 @@
     {
       "id": "monique",
       "name": "Monique",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "official": false,
       "author": "ToRvaLDz",
       "description": "Switch monitor profiles from the bar. Shows the active profile and lets you switch between saved configurations.",
@@ -850,7 +850,7 @@
         "System",
         "Panel"
       ],
-      "lastUpdated": "2026-04-08T15:33:46+02:00"
+      "lastUpdated": "2026-04-29T09:42:56+02:00"
     },
     {
       "id": "monitor-layout",
