@@ -17,6 +17,7 @@
     "no-prs": "Brak otwartych pull requestów",
     "no-mrs": "Brak otwartych żądań scalenia",
     "no-issues": "Brak otwartych zgłoszeń",
+    "no-bio": "Brak biografii",
     "loading": "Ładowanie…",
     "title": "Git Companion"
   },

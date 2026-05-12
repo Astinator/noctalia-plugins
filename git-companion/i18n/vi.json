@@ -17,6 +17,7 @@
     "no-prs": "Không có pull request nào đang mở",
     "no-mrs": "Không có merge request nào đang mở",
     "no-issues": "Không có vấn đề nào đang mở",
+    "no-bio": "Không có tiểu sử",
     "loading": "Đang tải…",
     "title": "Git Companion"
   },

@@ -18,6 +18,7 @@
     "no-prs": "No open pull requests",
     "no-mrs": "No open merge requests",
     "no-issues": "No open issues",
+    "no-bio": "No bio",
     "loading": "Loading…"
   },
   "settings": {

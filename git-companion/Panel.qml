@@ -206,7 +206,7 @@ Item {
                                 elide: Text.ElideRight
                                 font.weight: Font.Thin
                                 pointSize: Style.fontSizeXS
-                                text: root.main?.bio || "No bio"
+                                text: root.main?.repo || root.main?.bio || pluginApi?.tr("panel.no-bio") || ""
                             }
                         }
                     }

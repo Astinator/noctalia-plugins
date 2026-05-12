@@ -55,61 +55,45 @@ Item {
             if (data && Array.isArray(data.data))
                 return data.data;
         } catch (e) {}
-        try {
-            const lines = raw.split(/\r?\n/).map(s => s.trim()).filter(s => s.length > 0);
-            const items = [];
-            for (let i = 0; i < lines.length; i++) {
-                try {
-                    const obj = JSON.parse(lines[i]);
-                    if (obj !== null && typeof obj === "object")
-                        items.push(obj);
-                } catch (e) {}
-            }
-            if (items.length > 0)
-                return items;
-        } catch (e) {}
         return [];
+    }
+
+    function clearData() {
+        root.issuesList = [];
+        root.issuesCount = 0;
+        root.prsList = [];
+        root.prsCount = 0;
     }
 
     function scopeArgs() {
         const g = (root.group || "").trim();
         const r = (root.repo || "").trim();
-        if (root.platform === 'gitlab') {
-            if (g)
-                return ["--group", g];
-            if (r)
-                return ["--repo", r];
-            return [];
-        }
+        const groupFlag = root.platform === 'gitlab' ? "--group" : "--owner";
         if (g)
-            return ["--owner", g];
+            return [groupFlag, g];
         if (r)
             return ["--repo", r];
         return [];
     }
 
-    function normalizePr(raw) {
+    // kind: "pr" | "issue"
+    function listCommand(kind) {
         if (root.platform === 'gitlab') {
-            return {
-                title: raw.title || "",
-                url: raw.web_url || "",
-                ref: (raw.references && raw.references.full) || ("!" + (raw.iid || ""))
-            };
+            const sub = kind === 'pr' ? 'mr' : 'issue';
+            return ["glab", sub, "list"].concat(scopeArgs()).concat(["--assignee=@me", "--output", "json"]);
         }
-        const repoName = (raw.repository && (raw.repository.nameWithOwner || raw.repository.name)) || "";
-        return {
-            title: raw.title || "",
-            url: raw.url || "",
-            ref: repoName + "#" + (raw.number || "")
-        };
+        const sub = kind === 'pr' ? 'prs' : 'issues';
+        const filter = kind === 'pr' ? "--author=@me" : "--assignee=@me";
+        return ["gh", "search", sub, filter, "--state=open", "--json", "number,title,url,repository", "--limit", "15"].concat(scopeArgs());
     }
 
-    function normalizeIssue(raw) {
+    function normalize(raw, kind) {
         if (root.platform === 'gitlab') {
+            const prefix = kind === 'pr' ? '!' : '#';
             return {
                 title: raw.title || "",
                 url: raw.web_url || "",
-                ref: (raw.references && raw.references.full) || ("#" + (raw.iid || ""))
+                ref: (raw.references && raw.references.full) || (prefix + (raw.iid || ""))
             };
         }
         const repoName = (raw.repository && (raw.repository.nameWithOwner || raw.repository.name)) || "";
@@ -138,10 +122,7 @@ Item {
         // GitLab requires a scope; GitHub works globally
         if (platform === 'gitlab' && !hasScope) {
             root.loading = false;
-            root.issuesList = [];
-            root.issuesCount = 0;
-            root.prsList = [];
-            root.prsCount = 0;
+            root.clearData();
             return;
         }
         binProcess.running = true;
@@ -229,15 +210,12 @@ Item {
 
     Process {
         id: issueProcess
-        command: root.platform === 'gitlab' ? ["glab", "issue", "list"].concat(root.scopeArgs()).concat(["--assignee=@me", "--output", "json"]) : ["gh", "search", "issues", "--assignee=@me", "--state=open", "--json", "number,title,url,repository", "--limit", "15"].concat(root.scopeArgs())
+        command: root.listCommand("issue")
         stdout: StdioCollector {
             onStreamFinished: {
                 const raw = root.parseJsonArray(this.text);
-                const list = [];
-                for (let i = 0; i < raw.length; i++)
-                    list.push(root.normalizeIssue(raw[i]));
-                root.issuesList = list;
-                root.issuesCount = list.length;
+                root.issuesList = raw.map(item => root.normalize(item, "issue"));
+                root.issuesCount = root.issuesList.length;
             }
         }
         onExited: exitCode => {
@@ -252,15 +230,12 @@ Item {
 
     Process {
         id: prProcess
-        command: root.platform === 'gitlab' ? ["glab", "mr", "list"].concat(root.scopeArgs()).concat(["--assignee=@me", "--output", "json"]) : ["gh", "search", "prs", "--author=@me", "--state=open", "--json", "number,title,url,repository", "--limit", "15"].concat(root.scopeArgs())
+        command: root.listCommand("pr")
         stdout: StdioCollector {
             onStreamFinished: {
                 const raw = root.parseJsonArray(this.text);
-                const list = [];
-                for (let i = 0; i < raw.length; i++)
-                    list.push(root.normalizePr(raw[i]));
-                root.prsList = list;
-                root.prsCount = list.length;
+                root.prsList = raw.map(item => root.normalize(item, "pr"));
+                root.prsCount = root.prsList.length;
             }
         }
         onExited: exitCode => {

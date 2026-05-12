@@ -17,6 +17,7 @@
     "no-prs": "Açık pull request yok",
     "no-mrs": "Açık birleştirme isteği yok",
     "no-issues": "Açık sorun yok",
+    "no-bio": "Biyografi yok",
     "loading": "Yükleniyor…",
     "title": "Git Companion"
   },

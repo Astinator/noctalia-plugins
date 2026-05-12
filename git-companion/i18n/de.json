@@ -17,6 +17,7 @@
     "no-prs": "Keine offenen Pull Requests",
     "no-mrs": "Keine offenen Merge Requests",
     "no-issues": "Keine offenen Issues",
+    "no-bio": "Keine Biografie",
     "loading": "Wird geladen…",
     "title": "Git Companion"
   },

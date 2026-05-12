@@ -17,6 +17,7 @@
     "no-prs": "没有开放的拉取请求",
     "no-mrs": "没有开放的合并请求",
     "no-issues": "没有开放的问题",
+    "no-bio": "无简介",
     "loading": "加载中…",
     "title": "Git Companion"
   },

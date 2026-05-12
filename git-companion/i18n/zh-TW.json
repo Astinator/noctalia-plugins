@@ -17,6 +17,7 @@
     "no-prs": "沒有開放的拉取請求",
     "no-mrs": "沒有開放的合併請求",
     "no-issues": "沒有開放的問題",
+    "no-bio": "無簡介",
     "loading": "載入中…",
     "title": "Git Companion"
   },

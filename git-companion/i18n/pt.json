@@ -17,6 +17,7 @@
     "no-prs": "Nenhum pull request aberto",
     "no-mrs": "Nenhum merge request aberto",
     "no-issues": "Nenhuma issue aberta",
+    "no-bio": "Sem biografia",
     "loading": "Carregando…",
     "title": "Git Companion"
   },

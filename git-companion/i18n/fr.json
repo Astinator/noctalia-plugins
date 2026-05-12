@@ -17,6 +17,7 @@
     "no-prs": "Aucune pull request ouverte",
     "no-mrs": "Aucune merge request ouverte",
     "no-issues": "Aucune issue ouverte",
+    "no-bio": "Aucune bio",
     "loading": "Chargement…",
     "title": "Git Companion"
   },
