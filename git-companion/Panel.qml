@@ -316,7 +316,7 @@ Item {
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
 
-                                ListView {
+                                NListView {
                                     id: prListView
 
                                     anchors.fill: parent
@@ -362,7 +362,7 @@ Item {
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
 
-                                ListView {
+                                NListView {
                                     id: issueListView
 
                                     anchors.fill: parent
